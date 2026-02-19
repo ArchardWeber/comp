@@ -1,0 +1,28 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: qms-profile-app
+    restart: always
+    expose:
+      - "3000"
+    networks:
+      - webnet
+
+  nginx:
+    image: nginx:alpine
+    container_name: qms-profile-nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - app
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge

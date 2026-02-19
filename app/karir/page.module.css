@@ -1,0 +1,33 @@
+.filterBar {
+  display: flex; gap: 16px; align-items: center;
+  margin-bottom: 32px; flex-wrap: wrap;
+}
+.jobList { display: flex; flex-direction: column; gap: 16px; }
+.jobCard {
+  display: flex; align-items: center; justify-content: space-between;
+  background: white; border: 1px solid var(--qms-border);
+  border-radius: 12px; padding: 24px 32px;
+  transition: all 0.3s; flex-wrap: wrap; gap: 16px;
+}
+.jobCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--qms-red);
+  box-shadow: var(--shadow-hover);
+}
+.jobInfo { flex: 1; }
+.badge {
+  display: inline-block; background: var(--qms-red); color: white;
+  font-size: 11px; font-weight: 700; padding: 3px 8px;
+  border-radius: 4px; margin-bottom: 8px;
+}
+.jobCard h3 { font-size: 20px; margin-bottom: 8px; }
+.jobMeta { font-size: 14px; color: var(--qms-text-light); margin-bottom: 6px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.sep { color: var(--qms-border); }
+.jobDeadline { font-size: 13px; color: var(--qms-text-light); }
+
+@media (max-width: 640px) {
+  .filterBar { flex-direction: column; }
+  .filterBar .form-group { width: 100%; }
+  .jobCard { padding: 20px; }
+  .jobCard h3 { font-size: 18px; }
+}

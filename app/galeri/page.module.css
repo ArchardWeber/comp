@@ -1,0 +1,32 @@
+.tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+.tab {
+  padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 500;
+  background: none; border: 1px solid var(--qms-border); color: var(--qms-text-light);
+  cursor: pointer; transition: all 0.2s;
+}
+.tab:hover { color: var(--qms-text); border-color: var(--qms-text); }
+.tabActive {
+  background: var(--qms-red); color: white; border-color: var(--qms-red);
+}
+
+.gallery {
+  columns: 3; column-gap: 16px;
+}
+.galleryItem {
+  break-inside: avoid; margin-bottom: 16px;
+  border-radius: 8px; overflow: hidden;
+  cursor: pointer; position: relative;
+  transition: transform 0.3s;
+}
+.galleryItem:hover { transform: scale(1.02); box-shadow: var(--shadow-md); }
+.galleryItem img { width: 100%; display: block; }
+.galleryCaption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: white; padding: 16px 12px 12px; font-size: 13px;
+  opacity: 0; transition: opacity 0.3s;
+}
+.galleryItem:hover .galleryCaption { opacity: 1; }
+
+@media (max-width: 1024px) { .gallery { columns: 2; } }
+@media (max-width: 640px) { .gallery { columns: 1; } }

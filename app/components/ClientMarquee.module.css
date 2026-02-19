@@ -1,0 +1,24 @@
+.marqueeSection { overflow: hidden; padding: 8px 0; }
+.track { position: relative; }
+.inner {
+  display: flex;
+  gap: 56px;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+.logoItem { flex-shrink: 0; display: flex; align-items: center; }
+.logoItem img {
+  width: 120px;
+  height: 48px;
+  object-fit: contain;
+  opacity: 0.55;
+  transition: all 0.3s;
+}
+.logoItem img:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
