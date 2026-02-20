@@ -21,9 +21,9 @@ export default function GaleriPage() {
       <section className="page-header">
         <div className="container">
           <div className="breadcrumb">
-            <Link href="/">Beranda</Link><span>›</span><span className="current">Galeri & Klien</span>
+            <Link href="/">Beranda</Link><span>›</span><span className="current">Galeri &amp; Klien</span>
           </div>
-          <h1>Galeri & Dokumentasi</h1>
+          <h1>Galeri &amp; Dokumentasi</h1>
           <p>Lihat kegiatan dan aktivitas tim QMS</p>
         </div>
       </section>
@@ -54,10 +54,10 @@ export default function GaleriPage() {
         </div>
       </section>
 
-      <section className="section section-alt">
+      <section className="section">
         <div className="container">
           <div className="section-heading">
-            <h2>Klien & Partner Kami</h2>
+            <h2>Klien &amp; Partner Kami</h2>
             <p>Dipercaya oleh berbagai perusahaan di Indonesia</p>
             <div className="line"></div>
           </div>

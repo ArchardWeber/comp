@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { jobs } from '../../data/jobs';
+import { LocationIcon, BriefcaseIcon, CalendarIcon, CheckCircleIcon, WhatsAppIcon, EmailIcon } from '../../components/Icons';
 import styles from './page.module.css';
 
 export default function KarirDetail() {
@@ -42,7 +43,6 @@ export default function KarirDetail() {
   };
 
   const deadlineDate = new Date(job.deadline).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-  const postedAgo = Math.ceil((new Date(job.deadline) - new Date()) / (1000 * 60 * 60 * 24));
 
   return (
     <>
@@ -59,18 +59,16 @@ export default function KarirDetail() {
           <div className={styles.detailLayout}>
             {/* Main Content */}
             <div className={styles.content}>
-              {/* Header */}
               {job.isNew && <span className={styles.badge}>Full Time</span>}
               <h1 className={styles.title}>{job.title}</h1>
               <div className={styles.meta}>
-                <span>🏢 {job.division}</span>
-                <span>•</span>
-                <span>📍 {job.location}</span>
-                <span>•</span>
-                <span>📅 Deadline: {deadlineDate}</span>
+                <span className={styles.metaItem}><BriefcaseIcon size={15} /> {job.division}</span>
+                <span className={styles.metaDot}>•</span>
+                <span className={styles.metaItem}><LocationIcon size={15} /> {job.location}</span>
+                <span className={styles.metaDot}>•</span>
+                <span className={styles.metaItem}><CalendarIcon size={15} /> Deadline: {deadlineDate}</span>
               </div>
 
-              {/* Deskripsi */}
               <div className={styles.section}>
                 <div className={styles.sectionHeader}>
                   <div className={styles.sectionBar}></div>
@@ -79,7 +77,6 @@ export default function KarirDetail() {
                 <p>{job.description}</p>
               </div>
 
-              {/* Tanggung Jawab */}
               {job.responsibilities && (
                 <div className={styles.section}>
                   <div className={styles.sectionHeader}>
@@ -87,12 +84,16 @@ export default function KarirDetail() {
                     <h2>Tanggung Jawab Utama</h2>
                   </div>
                   <ul className={styles.checkList}>
-                    {job.responsibilities.map((r, i) => <li key={i}>{r}</li>)}
+                    {job.responsibilities.map((r, i) => (
+                      <li key={i}>
+                        <CheckCircleIcon size={17} className={styles.checkIcon} />
+                        {r}
+                      </li>
+                    ))}
                   </ul>
                 </div>
               )}
 
-              {/* Kualifikasi */}
               <div className={styles.section}>
                 <div className={styles.sectionHeader}>
                   <div className={styles.sectionBar}></div>
@@ -103,15 +104,15 @@ export default function KarirDetail() {
                 </ul>
               </div>
 
-              {/* Benefits */}
               <div className={styles.benefitSection}>
                 <div className={styles.benefitHeader}>
-                  <span>✅</span> <strong>Benefit & Fasilitas</strong>
+                  <CheckCircleIcon size={18} style={{ color: '#4ade80' }} />
+                  <strong>Benefit &amp; Fasilitas</strong>
                 </div>
                 <div className={styles.benefitGrid}>
                   {job.benefits.map((b, i) => (
                     <div key={i} className={styles.benefitItem}>
-                      <span className={styles.benefitIcon}>{b.icon}</span>
+                      <span className={styles.benefitDot}></span>
                       <span>{b.text}</span>
                     </div>
                   ))}
@@ -131,30 +132,37 @@ export default function KarirDetail() {
 
                 {!submitted ? (
                   <button className={`btn btn-primary ${styles.applyBtn}`} onClick={handleApply}>
-                    Lamar Sekarang ➤
+                    Lamar Sekarang
                   </button>
                 ) : (
-                  <div className={styles.appliedBadge}>✅ Lamaran Terkirim</div>
+                  <div className={styles.appliedBadge}>
+                    <CheckCircleIcon size={16} /> Lamaran Terkirim
+                  </div>
                 )}
 
-                <p className={styles.deadlineNote}>Lamaran akan ditutup pada {deadlineDate}</p>
+                <p className={styles.deadlineNote}>Lamaran ditutup pada {deadlineDate}</p>
 
                 <div className={styles.shareSection}>
                   <span>Bagikan lowongan ini</span>
                   <div className={styles.shareButtons}>
-                    <button onClick={() => navigator.clipboard?.writeText(window.location.href)} title="Copy link">🔗</button>
-                    <button onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(job.title + ' - ' + window.location.href)}`, '_blank')} title="Share WhatsApp">💬</button>
-                    <button onClick={() => window.open(`mailto:?subject=${encodeURIComponent(job.title)}&body=${encodeURIComponent(window.location.href)}`, '_blank')} title="Share Email">✉️</button>
+                    <button onClick={() => navigator.clipboard?.writeText(window.location.href)} title="Copy link">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                    </button>
+                    <button onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(job.title + ' - ' + window.location.href)}`, '_blank')} title="Share WhatsApp">
+                      <WhatsAppIcon size={18} />
+                    </button>
+                    <button onClick={() => window.open(`mailto:?subject=${encodeURIComponent(job.title)}&body=${encodeURIComponent(window.location.href)}`, '_blank')} title="Share Email">
+                      <EmailIcon size={18} />
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Success State */}
           {submitted && (
             <div className={styles.successCard}>
-              <div className={styles.successIcon}>✅</div>
+              <div className={styles.successIcon}><CheckCircleIcon size={48} /></div>
               <h2>Lamaran Anda Telah Terkirim!</h2>
               <p>Terima kasih telah melamar posisi <strong>{job.title}</strong>. Tim HRD kami akan menghubungi Anda segera.</p>
               <Link href="/karir" className="btn btn-outline" style={{ marginTop: '20px' }}>Lihat Lowongan Lain</Link>
@@ -172,14 +180,14 @@ export default function KarirDetail() {
               <span className={styles.modalLogoDot}>■</span> QMS
             </div>
             <h2 style={{ fontSize: '24px', marginBottom: '8px' }}>Masuk untuk Melamar</h2>
-            <p style={{ color: 'var(--qms-text-light)', fontSize: '14px', marginBottom: '28px' }}>
+            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '14px', marginBottom: '28px' }}>
               Login dengan akun Google Anda untuk melanjutkan proses lamaran
             </p>
             <button className={styles.googleBtn} onClick={handleGoogleLogin}>
               <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.9 33.4 29.4 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C33.9 5.6 29.2 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.2-2.7-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 15.5 18.8 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C33.9 5.6 29.2 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5 0 9.5-1.5 13.1-4.3l-6.1-5.2C29.1 35.8 26.7 36 24 36c-5.4 0-9.9-3.6-11.3-8.5l-6.5 5C9.5 39 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4 5.5l6.1 5.2C36.9 39.3 44 33.2 44 24c0-1.3-.2-2.7-.4-3.9z"/></svg>
               Sign in with Google
             </button>
-            <p style={{ fontSize: '12px', color: 'var(--qms-text-light)', marginTop: '20px' }}>
+            <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginTop: '20px' }}>
               Dengan masuk, Anda menyetujui Kebijakan Privasi kami
             </p>
           </div>
@@ -192,8 +200,8 @@ export default function KarirDetail() {
           <div className={`modal-content ${styles.formModal}`} onClick={e => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setShowFormModal(false)}>✕</button>
             <h2 style={{ fontSize: '22px', marginBottom: '4px' }}>Form Lamaran</h2>
-            <p style={{ color: 'var(--qms-text-light)', fontSize: '14px', marginBottom: '24px' }}>
-              {job.title} • Masuk sebagai <strong>{formData.email}</strong>
+            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '14px', marginBottom: '24px' }}>
+              {job.title} &bull; Masuk sebagai <strong>{formData.email}</strong>
             </p>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
@@ -202,7 +210,7 @@ export default function KarirDetail() {
               </div>
               <div className="form-group">
                 <label>Email</label>
-                <input type="email" value={formData.email} readOnly style={{ background: 'var(--qms-light-grey)' }} />
+                <input type="email" value={formData.email} readOnly style={{ opacity: 0.6 }} />
               </div>
               <div className={styles.formRow}>
                 <div className="form-group">
@@ -229,10 +237,10 @@ export default function KarirDetail() {
                 <label>Upload CV (PDF)</label>
                 <div className={styles.dropzone}>
                   <input type="file" accept=".pdf" onChange={e => setFormData({...formData, cv: e.target.files[0]})} />
-                  <p>{formData.cv ? `📄 ${formData.cv.name}` : '📎 Klik untuk upload atau drag file PDF'}</p>
+                  <p>{formData.cv ? formData.cv.name : 'Klik untuk upload atau drag file PDF'}</p>
                 </div>
               </div>
-              <button type="submit" className={`btn btn-primary ${styles.submitBtn}`}>Kirim Lamaran ➤</button>
+              <button type="submit" className={`btn btn-primary ${styles.submitBtn}`}>Kirim Lamaran</button>
             </form>
           </div>
         </div>
@@ -240,3 +248,4 @@ export default function KarirDetail() {
     </>
   );
 }
+

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import ScrollReveal from '../components/ScrollReveal';
+import { LocationIcon, BriefcaseIcon, ClockIcon, ArrowRightIcon } from '../components/Icons';
 import { jobs } from '../data/jobs';
 import styles from './page.module.css';
 
@@ -48,7 +49,7 @@ export default function KarirPage() {
           </div>
 
           <div className={styles.jobList}>
-            {filtered.length === 0 && <p style={{ textAlign: 'center', color: 'var(--qms-text-light)' }}>Tidak ada lowongan yang sesuai filter.</p>}
+            {filtered.length === 0 && <p className={styles.emptyMsg}>Tidak ada lowongan yang sesuai filter.</p>}
             {filtered.map((job, i) => (
               <ScrollReveal key={job.id} delay={i * 0.1}>
                 <Link href={`/karir/${job.id}`} className={styles.jobCard}>
@@ -56,15 +57,17 @@ export default function KarirPage() {
                     {job.isNew && <span className={styles.badge}>BARU</span>}
                     <h3>{job.title}</h3>
                     <div className={styles.jobMeta}>
-                      <span>📍 {job.location}</span>
+                      <span className={styles.metaItem}><LocationIcon size={14} /> {job.location}</span>
                       <span className={styles.sep}>|</span>
-                      <span>🏢 {job.division}</span>
+                      <span className={styles.metaItem}><BriefcaseIcon size={14} /> {job.division}</span>
                       <span className={styles.sep}>|</span>
-                      <span>⏰ {job.type}</span>
+                      <span className={styles.metaItem}><ClockIcon size={14} /> {job.type}</span>
                     </div>
                     <span className={styles.jobDeadline}>Deadline: {new Date(job.deadline).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                   </div>
-                  <span className="btn btn-ghost">Lihat Detail →</span>
+                  <span className={styles.detailBtn}>
+                    Lihat Detail <ArrowRightIcon size={16} />
+                  </span>
                 </Link>
               </ScrollReveal>
             ))}
