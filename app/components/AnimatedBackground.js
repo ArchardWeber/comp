@@ -6,12 +6,9 @@ export default function AnimatedBackground() {
       <div className={`${styles.orb} ${styles.orb1}`}></div>
       <div className={`${styles.orb} ${styles.orb2}`}></div>
       <div className={`${styles.orb} ${styles.orb3}`}></div>
-      <div className={`${styles.shape} ${styles.shape1}`}></div>
-      <div className={`${styles.shape} ${styles.shape2}`}></div>
-      <div className={`${styles.shape} ${styles.shape3}`}></div>
-      <div className={`${styles.shape} ${styles.shape4}`}></div>
-      <div className={`${styles.shape} ${styles.shape5}`}></div>
-      <div className={styles.dots}></div>
+      <div className={`${styles.orb} ${styles.orb4}`}></div>
+      <div className={`${styles.orb} ${styles.orb5}`}></div>
+      <div className={styles.grid}></div>
     </div>
   );
 }
