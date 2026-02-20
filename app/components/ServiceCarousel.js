@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import Image from 'next/image';
 import styles from './ServiceCarousel.module.css';
 import { ArrowRightIcon } from './Icons';
 
@@ -12,12 +11,11 @@ export default function ServiceCarousel({ services = [] }) {
           <div key={service.slug} className={styles.card}>
             <div className={styles.imageWrap}>
               {service.images?.[0] ? (
-                <Image
+                <img
                   src={service.images[0]}
                   alt={service.title}
-                  fill
                   className={styles.image}
-                  sizes="320px"
+                  loading="lazy"
                 />
               ) : (
                 <div className={styles.imagePlaceholder} />
