@@ -5,151 +5,168 @@
 /* === Header === */
 .badge {
   display: inline-flex; align-items: center;
-  background: var(--qms-red-gradient);
+  background: linear-gradient(135deg, #E31E24, #B8151A);
   color: white; font-size: 10px; font-weight: 700;
   padding: 4px 14px; border-radius: 100px; margin-bottom: 14px;
-  box-shadow: 0 2px 8px rgba(227,30,36,0.3);
+  box-shadow: 0 2px 10px rgba(227,30,36,0.4);
   letter-spacing: 0.5px; text-transform: uppercase;
 }
-.title { font-size: 28px; line-height: 1.3; margin-bottom: 12px; }
+.title { font-size: 28px; line-height: 1.3; margin-bottom: 12px; color: rgba(255,255,255,0.95); }
 .meta {
   display: flex; gap: 8px; flex-wrap: wrap;
-  font-size: 14px; color: var(--qms-text-light); margin-bottom: 32px;
+  font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 32px;
 }
+.metaItem { display: inline-flex; align-items: center; gap: 5px; }
+.metaDot { color: rgba(255,255,255,0.2); }
 
 /* === Content Sections === */
 .section { margin-bottom: 32px; }
 .sectionHeader { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-.sectionBar { width: 4px; height: 28px; background: var(--qms-red); border-radius: 2px; flex-shrink: 0; }
-.section h2 { font-size: 18px; margin: 0; }
-.section p { font-size: 15px; color: var(--qms-text-light); line-height: 1.8; }
+.sectionBar { width: 3px; height: 24px; background: #E31E24; border-radius: 2px; flex-shrink: 0; }
+.section h2 { font-size: 18px; margin: 0; color: rgba(255,255,255,0.9); }
+.section p { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.8; }
 
 .checkList { list-style: none; padding: 0; margin: 0; }
 .checkList li {
-  padding: 10px 0 10px 32px; position: relative;
-  font-size: 15px; color: var(--qms-text-light); line-height: 1.6;
-  border-bottom: 1px solid var(--qms-light-grey);
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 0;
+  font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.6;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 .checkList li:last-child { border-bottom: none; }
-.checkList li::before {
-  content: '✗'; position: absolute; left: 4px; top: 10px;
-  color: var(--qms-red); font-weight: 700; font-size: 14px;
-}
+.checkIcon { color: #E31E24; flex-shrink: 0; margin-top: 2px; }
 
 .dotList { list-style: none; padding: 0; margin: 0; }
 .dotList li {
-  padding: 8px 0 8px 24px; position: relative;
-  font-size: 15px; color: var(--qms-text-light); line-height: 1.6;
+  padding: 8px 0 8px 22px; position: relative;
+  font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.6;
 }
 .dotList li::before {
-  content: '•'; position: absolute; left: 6px;
-  color: var(--qms-red); font-weight: 700; font-size: 18px;
+  content: '•'; position: absolute; left: 4px;
+  color: #E31E24; font-size: 18px;
 }
 
 /* === Benefit === */
 .benefitSection {
-  background: var(--qms-light-grey); border-radius: 12px;
-  padding: 24px; margin-top: 32px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px; padding: 24px; margin-top: 32px;
 }
 .benefitHeader {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 16px; margin-bottom: 20px; padding-bottom: 12px;
-  border-bottom: 1px solid var(--qms-border);
+  display: flex; align-items: center; gap: 10px;
+  font-size: 16px; margin-bottom: 20px; padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.9);
 }
 .benefitGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .benefitItem {
   display: flex; align-items: center; gap: 10px;
-  background: white; border-radius: 8px; padding: 14px 16px;
-  font-size: 14px; font-weight: 500;
+  background: rgba(255,255,255,0.06); border-radius: 10px; padding: 12px 16px;
+  font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.08);
 }
-.benefitIcon {
-  width: 32px; height: 32px; border-radius: 8px;
-  background: var(--qms-red-light);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px; flex-shrink: 0;
+.benefitDot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #E31E24; flex-shrink: 0;
 }
 
 /* === Sidebar === */
 .sidebar { position: sticky; top: 100px; }
 .sidebarCard {
-  background: white; border: 1px solid var(--qms-border);
-  border-radius: 20px; padding: 28px 24px;
-  box-shadow: var(--shadow-md);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 24px; padding: 28px 24px;
 }
 .sidebarTitle {
   font-size: 17px; margin-bottom: 20px; font-family: 'Montserrat', sans-serif;
+  color: rgba(255,255,255,0.95);
 }
 .sidebarRow {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 0; border-bottom: 1px solid var(--qms-light-grey);
+  padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
   font-size: 14px;
 }
-.sidebarRow span { color: var(--qms-text-light); }
-.sidebarRow strong { font-size: 14px; text-align: right; }
-.sidebarRow strong small { color: var(--qms-text-light); font-weight: 400; }
-.applyBtn { width: 100%; margin-top: 24px; font-size: 16px; padding: 14px; }
+.sidebarRow span { color: rgba(255,255,255,0.5); }
+.sidebarRow strong { font-size: 14px; text-align: right; color: rgba(255,255,255,0.9); }
+.sidebarRow strong small { color: rgba(255,255,255,0.4); font-weight: 400; }
+.applyBtn { width: 100%; margin-top: 24px; font-size: 15px; padding: 14px; }
 .appliedBadge {
   width: 100%; margin-top: 24px; padding: 14px;
-  text-align: center; background: #e8f5e9; color: #2e7d32;
-  border-radius: 8px; font-weight: 600; font-size: 14px;
+  text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: rgba(74,222,128,0.1); color: #4ade80;
+  border: 1px solid rgba(74,222,128,0.25);
+  border-radius: 100px; font-weight: 600; font-size: 14px;
 }
 .deadlineNote {
-  text-align: center; font-size: 12px; color: var(--qms-red);
+  text-align: center; font-size: 12px; color: rgba(255,255,255,0.4);
   margin-top: 12px;
 }
 
 /* === Share === */
 .shareSection {
   margin-top: 24px; padding-top: 20px;
-  border-top: 1px solid var(--qms-border);
+  border-top: 1px solid rgba(255,255,255,0.08);
   text-align: center;
 }
-.shareSection > span { font-size: 13px; color: var(--qms-text-light); display: block; margin-bottom: 12px; }
+.shareSection > span { font-size: 13px; color: rgba(255,255,255,0.45); display: block; margin-bottom: 12px; }
 .shareButtons { display: flex; gap: 8px; justify-content: center; }
 .shareButtons button {
-  width: 44px; height: 44px; border: 1px solid var(--qms-border);
-  background: white; border-radius: 8px; font-size: 18px; cursor: pointer;
-  transition: all 0.2s;
+  width: 44px; height: 44px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  border-radius: 10px; cursor: pointer; transition: all 0.2s;
+  color: rgba(255,255,255,0.6);
+  display: flex; align-items: center; justify-content: center;
 }
-.shareButtons button:hover { border-color: var(--qms-red); background: var(--qms-red-light); }
+.shareButtons button:hover { border-color: rgba(227,30,36,0.4); color: #E31E24; background: rgba(227,30,36,0.1); }
 
-/* === Modal Logo === */
+/* === Modal === */
 .modalLogo {
   font-family: 'Montserrat', sans-serif; font-weight: 700;
-  font-size: 20px; margin-bottom: 20px;
+  font-size: 20px; margin-bottom: 20px; color: rgba(255,255,255,0.95);
 }
-.modalLogoDot { color: var(--qms-red); margin-right: 4px; }
+.modalLogoDot { color: #E31E24; margin-right: 4px; }
 
-/* === Form Modal === */
 .formModal { max-width: 580px; max-height: 85vh; overflow-y: auto; }
 .formRow { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
 .googleBtn {
   width: 100%; display: flex; align-items: center; justify-content: center;
-  gap: 12px; padding: 14px; border: 1px solid var(--qms-border);
-  background: white; border-radius: 8px; font-size: 15px; font-weight: 500;
-  cursor: pointer; transition: all 0.2s;
+  gap: 12px; padding: 14px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px; font-size: 15px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; color: rgba(255,255,255,0.85);
 }
-.googleBtn:hover { background: var(--qms-light-grey); box-shadow: var(--shadow-sm); }
+.googleBtn:hover { background: rgba(255,255,255,0.14); }
+
 .dropzone {
-  border: 2px dashed var(--qms-border); border-radius: 8px;
+  border: 2px dashed rgba(255,255,255,0.2); border-radius: 10px;
   padding: 24px; text-align: center; position: relative; cursor: pointer;
   transition: border-color 0.2s;
 }
-.dropzone:hover { border-color: var(--qms-red); }
-.dropzone input {
-  position: absolute; inset: 0; opacity: 0; cursor: pointer;
-}
-.dropzone p { color: var(--qms-text-light); font-size: 14px; margin: 0; }
+.dropzone:hover { border-color: #E31E24; }
+.dropzone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.dropzone p { color: rgba(255,255,255,0.45); font-size: 14px; margin: 0; }
 .submitBtn { width: 100%; font-size: 16px; padding: 14px; }
 
 /* === Success === */
 .successCard {
-  text-align: center; background: #e8f5e9;
-  border-radius: 16px; padding: 48px 32px; margin-top: 32px;
+  text-align: center;
+  background: rgba(74,222,128,0.08);
+  border: 1px solid rgba(74,222,128,0.2);
+  border-radius: 20px; padding: 48px 32px; margin-top: 32px;
 }
-.successIcon { font-size: 48px; margin-bottom: 16px; }
-.successCard h2 { color: #2e7d32; margin-bottom: 8px; }
-.successCard p { color: var(--qms-text-light); }
+.successIcon {
+  display: flex; justify-content: center;
+  color: #4ade80; margin-bottom: 16px;
+}
+.successCard h2 { color: rgba(255,255,255,0.95); margin-bottom: 8px; }
+.successCard p { color: rgba(255,255,255,0.6); }
+.successCard strong { color: rgba(255,255,255,0.9); }
 
 /* === Responsive === */
 @media (max-width: 1024px) {

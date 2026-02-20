@@ -1,0 +1,150 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.card {
+  width: 100%;
+  max-width: 760px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  padding: 48px 52px;
+  position: relative;
+  text-align: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fadeOut {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.quoteOpen,
+.quoteClose {
+  position: absolute;
+  font-size: 6rem;
+  line-height: 1;
+  color: #E31E24;
+  opacity: 0.3;
+  font-family: Georgia, serif;
+  pointer-events: none;
+}
+
+.quoteOpen {
+  top: 16px;
+  left: 28px;
+}
+
+.quoteClose {
+  bottom: 60px;
+  right: 28px;
+}
+
+.quote {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 28px;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+
+.author {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.authorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.role {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.arrow {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.arrow:hover {
+  background: rgba(227, 30, 36, 0.2);
+  border-color: rgba(227, 30, 36, 0.5);
+  color: #E31E24;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease, width 0.3s ease;
+  padding: 0;
+}
+
+.dotActive {
+  background: #E31E24;
+  width: 24px;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 36px 28px;
+  }
+
+  .quote {
+    font-size: 1rem;
+  }
+
+  .quoteOpen,
+  .quoteClose {
+    font-size: 4rem;
+  }
+}

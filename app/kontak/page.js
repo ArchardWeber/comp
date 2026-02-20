@@ -2,7 +2,15 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import ScrollReveal from '../components/ScrollReveal';
+import { LocationIcon, PhoneIcon, EmailIcon, ClockIcon, CheckCircleIcon } from '../components/Icons';
 import styles from './page.module.css';
+
+const infoItems = [
+  { Icon: LocationIcon, label: 'Alamat', value: 'Jl. Basudewa Raya No 3a, Semarang, Jawa Tengah' },
+  { Icon: PhoneIcon, label: 'Telepon', value: '(024) 7654-321' },
+  { Icon: EmailIcon, label: 'Email', value: 'info@qms.co.id' },
+  { Icon: ClockIcon, label: 'Jam Operasional', value: 'Senin - Jumat, 08:00 - 17:00 WIB' },
+];
 
 export default function KontakPage() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
@@ -28,15 +36,12 @@ export default function KontakPage() {
       <section className="section">
         <div className="container">
           <div className={styles.infoGrid}>
-            {[
-              { icon: '📍', label: 'Alamat', value: 'Jl. Basudewa Raya No 3a, Semarang, Jawa Tengah' },
-              { icon: '📞', label: 'Telepon', value: '(024) 7654-321' },
-              { icon: '✉️', label: 'Email', value: 'info@qms.co.id' },
-              { icon: '🕐', label: 'Jam Operasional', value: 'Senin - Jumat, 08:00 - 17:00 WIB' },
-            ].map((item, i) => (
+            {infoItems.map((item, i) => (
               <ScrollReveal key={item.label} delay={i * 0.1}>
                 <div className={styles.infoCard}>
-                  <div className={styles.infoIcon}>{item.icon}</div>
+                  <div className={styles.infoIcon}>
+                    <item.Icon size={24} />
+                  </div>
                   <h4>{item.label}</h4>
                   <p>{item.value}</p>
                 </div>
@@ -51,7 +56,7 @@ export default function KontakPage() {
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.2!2d110.42!3d-6.97!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTgnMTIuMCJTIDExMMKwMjUnMTIuMCJF!5e0!3m2!1sid!2sid!4v1!5m2!1sid!2sid"
                   width="100%"
                   height="100%"
-                  style={{ border: 0, borderRadius: '12px' }}
+                  style={{ border: 0, borderRadius: '16px' }}
                   allowFullScreen=""
                   loading="lazy"
                   title="Lokasi QMS"
@@ -62,13 +67,13 @@ export default function KontakPage() {
             <ScrollReveal delay={0.2}>
               <div className={styles.formCard}>
                 <h3>Kirim Pesan</h3>
-                <p style={{ color: 'var(--qms-text-light)', marginBottom: '24px', fontSize: '14px' }}>
+                <p className={styles.formSubtitle}>
                   Isi formulir di bawah atau hubungi kami langsung via WhatsApp
                 </p>
 
                 {sent ? (
                   <div className={styles.sentMsg}>
-                    <span>✅</span>
+                    <div className={styles.sentIcon}><CheckCircleIcon size={48} /></div>
                     <h4>Pesan Terkirim!</h4>
                     <p>Terima kasih. Tim kami akan segera merespons.</p>
                     <button className="btn btn-outline" onClick={() => { setSent(false); setFormData({ name: '', email: '', subject: '', message: '' }); }}>

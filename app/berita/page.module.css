@@ -1,40 +1,81 @@
+/* === Featured === */
+.featuredCard {
+  display: grid; grid-template-columns: 1.4fr 1fr;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 24px; overflow: hidden;
+  margin-bottom: 40px;
+  transition: all 0.35s;
+}
+.featuredCard:hover { border-color: rgba(227,30,36,0.35); transform: translateY(-4px); }
+.featuredThumb { position: relative; aspect-ratio: 16/9; overflow: hidden; }
+.featuredThumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.featuredCard:hover .featuredThumb img { transform: scale(1.05); }
+.featuredOverlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 60%, rgba(15,15,20,0.6) 100%);
+}
+.featuredBody {
+  padding: 40px 36px; display: flex; flex-direction: column; justify-content: center;
+}
+.featuredTitle {
+  font-size: 24px; font-family: 'Montserrat', sans-serif; font-weight: 700;
+  line-height: 1.4; margin-bottom: 12px; color: rgba(255,255,255,0.95);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+
+/* === Grid === */
+.newsGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
 .newsCard {
-  display: block; background: white; border: 1px solid var(--qms-border);
-  border-radius: 16px; overflow: hidden; transition: all 0.35s; height: 100%;
-  position: relative;
+  display: block;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px; overflow: hidden;
+  transition: all 0.35s; height: 100%;
 }
-.newsCard::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  box-shadow: inset 0 0 0 2px var(--qms-red);
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-}
-.newsCard:hover { transform: translateY(-10px); border-color: transparent; box-shadow: var(--shadow-hover); }
-.newsCard:hover::after { opacity: 1; }
+.newsCard:hover { transform: translateY(-8px); border-color: rgba(227,30,36,0.35); }
+
 .newsThumb { aspect-ratio: 16/9; overflow: hidden; }
 .newsThumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
 .newsCard:hover .newsThumb img { transform: scale(1.06); }
-.newsBody { padding: 24px; }
+
+.newsBody { padding: 20px 22px 24px; }
+
 .newsCat {
-  display: inline-block; background: rgba(227,30,36,0.08); color: var(--qms-red);
+  display: inline-block; background: rgba(227,30,36,0.15); color: #E31E24;
   font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 100px;
   margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase;
-  border: 1px solid rgba(227,30,36,0.15);
+  border: 1px solid rgba(227,30,36,0.25);
 }
 .newsTitle {
-  font-size: 18px; font-family: 'Montserrat', sans-serif; font-weight: 600;
-  line-height: 1.4; margin-bottom: 10px;
+  font-size: 17px; font-family: 'Montserrat', sans-serif; font-weight: 600;
+  line-height: 1.4; margin-bottom: 10px; color: rgba(255,255,255,0.95);
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   transition: color 0.2s;
 }
-.newsCard:hover .newsTitle { color: var(--qms-red); }
+.newsCard:hover .newsTitle { color: #E31E24; }
 .newsExcerpt {
-  font-size: 14px; color: var(--qms-text-light); line-height: 1.6;
+  font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.6;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   margin-bottom: 14px;
 }
-.newsDate { font-size: 13px; color: var(--qms-text-light); }
+.newsDate {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; color: rgba(255,255,255,0.4);
+}
+
+@media (max-width: 1024px) {
+  .featuredCard { grid-template-columns: 1fr; }
+  .featuredOverlay { background: linear-gradient(transparent 60%, rgba(15,15,20,0.7) 100%); }
+  .newsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .newsGrid { grid-template-columns: 1fr; }
+  .featuredBody { padding: 24px; }
+  .featuredTitle { font-size: 20px; }
+}

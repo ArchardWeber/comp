@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import ScrollReveal from '../components/ScrollReveal';
 import ServiceIcon from '../components/ServiceIcon';
+import { ArrowRightIcon } from '../components/Icons';
 import { services } from '../data/services';
 import styles from './page.module.css';
 
@@ -28,13 +29,16 @@ export default function LayananPage() {
                     <img src={svc.images[0]} alt={svc.title} />
                     <div className={styles.thumbOverlay}></div>
                     <div className={styles.iconFloat}>
-                      <ServiceIcon slug={svc.slug} size={24} color="#E31E24" />
+                      <ServiceIcon slug={svc.slug} size={24} color="white" />
                     </div>
                   </div>
                   <div className={styles.body}>
                     <h3>{svc.title}</h3>
                     <p>{svc.shortDesc}</p>
-                    <span className={styles.link}>Selengkapnya →</span>
+                    <span className={styles.link}>
+                      Selengkapnya
+                      <ArrowRightIcon size={16} />
+                    </span>
                   </div>
                 </Link>
               </ScrollReveal>
