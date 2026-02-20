@@ -3,17 +3,30 @@ import styles from './ClientMarquee.module.css';
 import { clients } from '../data/clients';
 
 export default function ClientMarquee() {
+  const doubled = [...clients, ...clients];
+
   return (
-    <div className={styles.marqueeSection}>
+    <div className={styles.wrapper}>
+      <div className={styles.fadeLeft} aria-hidden="true" />
       <div className={styles.track}>
         <div className={styles.inner}>
-          {[...clients, ...clients].map((c, i) => (
-            <div key={i} className={styles.logoItem}>
-              <img src={c.logo} alt={c.name} title={c.name} />
+          {doubled.map((client, index) => (
+            <div
+              key={`${client.name}-${index}`}
+              className={styles.logoItem}
+              title={client.name}
+            >
+              <img
+                src={client.logo}
+                alt={client.name}
+                width={120}
+                height={48}
+              />
             </div>
           ))}
         </div>
       </div>
+      <div className={styles.fadeRight} aria-hidden="true" />
     </div>
   );
 }
