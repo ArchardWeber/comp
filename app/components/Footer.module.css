@@ -5,12 +5,18 @@
   position: relative;
   overflow: hidden;
 }
-.footer::before {
-  content: '';
+.wave {
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--qms-red), #ff6b35, var(--qms-red), transparent);
+  line-height: 0;
+  overflow: hidden;
+  height: 80px;
+  transform: rotate(180deg);
+  pointer-events: none;
+}
+.wave svg {
+  width: 100%;
+  height: 80px;
 }
 .footer::after {
   content: '';

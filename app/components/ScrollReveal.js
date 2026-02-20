@@ -1,8 +1,10 @@
 'use client';
 import { useEffect, useRef } from 'react';
 
-export default function ScrollReveal({ children, className = '', delay = 0 }) {
+export default function ScrollReveal({ children, className = '', delay = 0, direction = 'up' }) {
   const ref = useRef(null);
+
+  const dirClass = direction === 'left' ? 'reveal-left' : direction === 'right' ? 'reveal-right' : 'reveal';
 
   useEffect(() => {
     const el = ref.current;
@@ -23,7 +25,7 @@ export default function ScrollReveal({ children, className = '', delay = 0 }) {
   return (
     <div
       ref={ref}
-      className={`reveal ${className}`}
+      className={`${dirClass} ${className}`}
       style={{ transitionDelay: `${delay}s` }}
     >
       {children}

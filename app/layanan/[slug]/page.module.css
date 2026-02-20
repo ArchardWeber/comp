@@ -8,9 +8,9 @@
   position: absolute; inset: 0;
   background: linear-gradient(
     160deg,
-    rgba(15,17,26,0.75) 0%,
-    rgba(30,32,48,0.6) 50%,
-    rgba(227,30,36,0.15) 100%
+    rgba(255,255,255,0.90) 0%,
+    rgba(248,245,245,0.85) 50%,
+    rgba(227,30,36,0.05) 100%
   );
 }
 .heroContent {
@@ -18,11 +18,11 @@
   padding: 110px 24px 48px;
   max-width: 1200px; margin: 0 auto; width: 100%;
 }
-.heroContent h1 { font-size: 40px; color: white; }
-.heroContent .breadcrumb a { color: rgba(255,255,255,0.6); }
-.heroContent .breadcrumb a:hover { color: white; }
-.heroContent .breadcrumb .current { color: rgba(255,255,255,0.9); }
-.heroContent .breadcrumb { color: rgba(255,255,255,0.5); }
+.heroContent h1 { font-size: 40px; color: var(--qms-text); }
+.heroContent .breadcrumb a { color: var(--qms-text-light); }
+.heroContent .breadcrumb a:hover { color: var(--qms-red); }
+.heroContent .breadcrumb .current { color: var(--qms-red); }
+.heroContent .breadcrumb { color: var(--qms-text-light); }
 
 .detailGrid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: start; }
 .detailGrid h2 { font-size: 28px; }

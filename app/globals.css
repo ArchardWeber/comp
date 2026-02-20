@@ -12,8 +12,12 @@
   --qms-border: #E5E7EB;
   --qms-charcoal: #1E2030;
   --qms-charcoal-2: #2D2D3A;
-  --qms-text: #1F2937;
-  --qms-text-light: #6B7280;
+  --qms-text: #1A1D2B;
+  --qms-text-light: #5A6078;
+  --qms-bg-primary: #FFFFFF;
+  --qms-bg-secondary: #F8F9FC;
+  --qms-bg-tertiary: #F1F3F8;
+  --qms-bg-rose: #FFF8F8;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
   --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
@@ -117,9 +121,9 @@ button { cursor: pointer; font-family: 'Inter', sans-serif; border: none; outlin
 }
 
 /* Section Styles */
-.section { padding: 88px 0; position: relative; }
+.section { padding: 88px 0; position: relative; overflow: hidden; }
 .section-alt {
-  background: var(--qms-off-white);
+  background: var(--qms-bg-secondary);
 }
 .section-red-light { background: var(--qms-red-light); }
 .section-dark {
@@ -146,9 +150,9 @@ button { cursor: pointer; font-family: 'Inter', sans-serif; border: none; outlin
   margin: 16px auto 0;
 }
 
-/* Page Header — modern dark gradient */
+/* Page Header — LIGHT elegant gradient */
 .page-header {
-  background: linear-gradient(135deg, var(--qms-charcoal) 0%, #252840 65%, rgba(227,30,36,0.15) 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #F1F3F8 60%, #FFF0F0 100%);
   padding: 140px 0 64px;
   text-align: center;
   position: relative;
@@ -158,7 +162,7 @@ button { cursor: pointer; font-family: 'Inter', sans-serif; border: none; outlin
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(227,30,36,0.06) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 .page-header::after {
@@ -174,20 +178,20 @@ button { cursor: pointer; font-family: 'Inter', sans-serif; border: none; outlin
 .page-header h1 {
   font-size: 42px;
   margin-bottom: 8px;
-  color: white;
+  color: var(--qms-text);
   position: relative;
 }
 .page-header p {
-  color: rgba(255,255,255,0.7);
+  color: var(--qms-text-light);
   font-size: 16px;
   position: relative;
 }
 .page-header .breadcrumb {
-  color: rgba(255,255,255,0.5);
+  color: var(--qms-text-light);
   position: relative;
 }
-.page-header .breadcrumb a { color: rgba(255,255,255,0.5); }
-.page-header .breadcrumb a:hover { color: white; }
+.page-header .breadcrumb a { color: var(--qms-text-light); }
+.page-header .breadcrumb a:hover { color: var(--qms-red); }
 .page-header .breadcrumb .current { color: var(--qms-red); }
 
 /* Breadcrumb */
@@ -245,25 +249,16 @@ button { cursor: pointer; font-family: 'Inter', sans-serif; border: none; outlin
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 
-/* Scroll Reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* Scroll Reveal — base (enhanced versions at bottom) */
 .reveal-delay-1 { transition-delay: 0.1s; }
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
 .reveal-delay-5 { transition-delay: 0.5s; }
 
-/* CTA Banner — vibrant red */
+/* CTA Banner — LIGHT with red accents */
 .cta-banner {
-  background: linear-gradient(135deg, #E31E24 0%, #B8151A 60%, #8B0F14 100%);
+  background: linear-gradient(135deg, #FFF5F5 0%, #FFFFFF 50%, #F8F9FC 100%);
   padding: 88px 0;
   text-align: center;
   position: relative;
@@ -273,7 +268,7 @@ button { cursor: pointer; font-family: 'Inter', sans-serif; border: none; outlin
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(227,30,36,0.04) 1px, transparent 1px);
   background-size: 36px 36px;
 }
 .cta-banner::after {
@@ -289,34 +284,34 @@ button { cursor: pointer; font-family: 'Inter', sans-serif; border: none; outlin
 .cta-banner h2 {
   font-size: 36px;
   margin-bottom: 12px;
-  color: white;
+  color: var(--qms-text);
   position: relative;
 }
 .cta-banner p {
-  color: rgba(255,255,255,0.85);
+  color: var(--qms-text-light);
   margin-bottom: 28px;
   position: relative;
 }
 .cta-banner .btn-primary {
-  background: white;
-  color: var(--qms-red);
+  background: var(--qms-red-gradient);
+  color: white;
   border-color: transparent;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 20px rgba(227,30,36,0.3);
   position: relative;
 }
 .cta-banner .btn-primary:hover {
-  background: var(--qms-off-white);
+  background: linear-gradient(135deg, #c41920 0%, #a01217 100%);
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 30px rgba(227,30,36,0.4);
 }
 .cta-banner .btn-outline {
-  border-color: white;
-  color: white;
+  border-color: var(--qms-red);
+  color: var(--qms-red);
   position: relative;
 }
 .cta-banner .btn-outline:hover {
-  background: white;
-  color: var(--qms-red);
+  background: var(--qms-red);
+  color: white;
 }
 
 /* Form Styles */
@@ -413,6 +408,29 @@ button { cursor: pointer; font-family: 'Inter', sans-serif; border: none; outlin
 }
 .modal-close:hover { color: var(--qms-red); }
 
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(227,30,36,0.4); }
+
+/* Selection color */
+::selection { background: rgba(227,30,36,0.15); color: var(--qms-text); }
+
+/* Dot-grid utility */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Reveal — add direction support */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
 /* Responsive */
 @media (max-width: 1024px) {
   h1 { font-size: 36px; }
@@ -435,5 +453,3 @@ button { cursor: pointer; font-family: 'Inter', sans-serif; border: none; outlin
   .cta-banner { padding: 64px 0; }
   .cta-banner h2 { font-size: 26px; }
 }
-
-
