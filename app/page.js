@@ -1,13 +1,31 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import ScrollReveal from './components/ScrollReveal';
 import ClientMarquee from './components/ClientMarquee';
-import ServiceIcon from './components/ServiceIcon';
+import ServiceCarousel from './components/ServiceCarousel';
+import TestimonialSlider from './components/TestimonialSlider';
+import ProcessTimeline from './components/ProcessTimeline';
+import BentoGrid from './components/BentoGrid';
+import RunningText from './components/RunningText';
+import {
+  CalendarIcon,
+  UsersIcon,
+  BriefcaseIcon,
+  ZapIcon,
+  PhoneIcon,
+  TargetIcon,
+  CheckCircleIcon,
+  AwardIcon,
+  ShieldIcon,
+  BuildingIcon,
+  PlayIcon,
+  WhatsAppIcon,
+} from './components/Icons';
 import { services } from './data/services';
 import styles from './page.module.css';
 
-function StatCounter({ end, label, suffix = '' }) {
+function StatCounter({ end, label, suffix = '', icon }) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
   const started = useRef(false);
@@ -15,27 +33,31 @@ function StatCounter({ end, label, suffix = '' }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !started.current) {
-        started.current = true;
-        let start = 0;
-        const duration = 2000;
-        const step = (timestamp) => {
-          if (!start) start = timestamp;
-          const progress = Math.min((timestamp - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          setCount(Math.floor(eased * end));
-          if (progress < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-      }
-    }, { threshold: 0.3 });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          let startTime = 0;
+          const duration = 2000;
+          const step = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(eased * end));
+            if (progress < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        }
+      },
+      { threshold: 0.3 }
+    );
     observer.observe(el);
     return () => observer.disconnect();
   }, [end]);
 
   return (
     <div ref={ref} className={styles.statCard}>
+      <div className={styles.statIcon}>{icon}</div>
       <div className={styles.statNumber}>{count}{suffix}</div>
       <div className={styles.statLabel}>{label}</div>
     </div>
@@ -51,10 +73,7 @@ function YouTubeEmbed({ videoId }) {
       <div className={styles.videoFacade} onClick={() => setLoaded(true)}>
         <img src={thumbUrl} alt="Video Profil QMS" />
         <div className={styles.playButton}>
-          <svg width="48" height="48" viewBox="0 0 68 48">
-            <path d="M66.5 7.7s-.7-4.7-2.8-6.8C60.7-2 57.2-2 55.6-2.2 46.5-3 34-3 34-3s-12.5 0-21.6.8c-1.6.2-5.1.2-8.1 3.2C2.2 3 1.5 7.7 1.5 7.7S.8 13.2.8 18.7v5.1c0 5.5.7 11 .7 11s.7 4.7 2.8 6.8c3 3.2 7 3.1 8.8 3.4 6.4.6 27.2.9 27.2.9s12.5 0 21.6-.8c1.6-.2 5.1-.2 8.1-3.2 2.1-2.1 2.8-6.8 2.8-6.8s.7-5.5.7-11v-5.1c0-5.5-.7-11-.7-11z" fill="#E31E24"/>
-            <path d="M27 33V14l18.5 9.5L27 33z" fill="white"/>
-          </svg>
+          <PlayIcon size={28} />
         </div>
       </div>
     );
@@ -71,68 +90,46 @@ function YouTubeEmbed({ videoId }) {
   );
 }
 
-const whyItems = [
-  { title: 'Berpengalaman Sejak 2016', desc: 'Lebih dari 8 tahun mengelola fasilitas di berbagai sektor industri.' },
-  { title: 'SDM Terlatih & Bersertifikat', desc: 'Seluruh personel melalui pelatihan intensif dan memiliki sertifikat resmi.' },
-  { title: 'Peralatan Modern', desc: 'Menggunakan peralatan berteknologi tinggi dan bahan ramah lingkungan.' },
-  { title: 'Layanan Terintegrasi', desc: 'Solusi terpadu dari satu pintu — cepat, tepat, dan terukur.' },
-  { title: 'Dipercaya 50+ Perusahaan', desc: 'Klien dari sektor perbankan, kesehatan, manufaktur, dan properti.' },
+const processSteps = [
+  { num: '01', title: 'Konsultasi', desc: 'Diskusi mendalam tentang kebutuhan operasional perusahaan Anda.', icon: <PhoneIcon size={20} /> },
+  { num: '02', title: 'Survei & Analisa', desc: 'Tim kami melakukan survei lapangan dan analisis kebutuhan.', icon: <TargetIcon size={20} /> },
+  { num: '03', title: 'Penawaran', desc: 'Kami menyiapkan proposal solusi yang sesuai kebutuhan dan budget.', icon: <BriefcaseIcon size={20} /> },
+  { num: '04', title: 'Eksekusi', desc: 'Implementasi dengan SDM terlatih dan monitoring berkala.', icon: <CheckCircleIcon size={20} /> },
 ];
 
-const workSteps = [
-  { num: '01', title: 'Konsultasi', desc: 'Diskusi mendalam tentang kebutuhan operasional dan fasilitas perusahaan Anda.' },
-  { num: '02', title: 'Survey & Analisa', desc: 'Tim kami melakukan survei lapangan dan analisis kebutuhan secara menyeluruh.' },
-  { num: '03', title: 'Implementasi', desc: 'Penempatan SDM terlatih dan peralatan sesuai standar yang disepakati.' },
-  { num: '04', title: 'Monitoring & Evaluasi', desc: 'Pemantauan berkala dan laporan performa untuk memastikan kualitas terjaga.' },
-];
-
-const certItems = [
-  { icon: '📋', title: 'ISO 9001:2015', desc: 'Sistem Manajemen Mutu' },
-  { icon: '🏛️', title: 'Badan Hukum PT', desc: 'Legalitas Perusahaan' },
-  { icon: '💪', title: 'BPJS Ketenagakerjaan', desc: 'Jaminan Tenaga Kerja' },
-  { icon: '🏥', title: 'BPJS Kesehatan', desc: 'Jaminan Kesehatan' },
-  { icon: '🤝', title: 'APJASI', desc: 'Asosiasi Outsourcing' },
+const bentoItems = [
+  { title: 'Berpengalaman Sejak 2016', desc: '8+ tahun melayani berbagai sektor industri dengan standar tinggi.', icon: <AwardIcon size={32} />, span: 2 },
+  { title: 'SDM Profesional', desc: 'Seluruh personel terlatih, bersertifikat, dan terjamin kompetensinya.', icon: <UsersIcon size={28} /> },
+  { title: 'Peralatan Modern', desc: 'Teknologi terkini dengan bahan ramah lingkungan.', icon: <ZapIcon size={28} /> },
+  { title: 'Layanan Terintegrasi', desc: 'Solusi satu pintu untuk semua kebutuhan fasilitas.', icon: <ShieldIcon size={28} /> },
+  { title: '50+ Perusahaan', desc: 'Dipercaya klien dari perbankan, kesehatan, dan manufaktur.', icon: <BuildingIcon size={28} />, span: 2 },
 ];
 
 const testimonials = [
-  {
-    quote: 'QMS memberikan pelayanan yang sangat profesional. Tim mereka responsif dan selalu menjaga standar kebersihan yang tinggi.',
-    name: 'Budi Santoso',
-    company: 'PT Mitra Sejahtera',
-    role: 'General Manager',
-  },
-  {
-    quote: 'Sejak bermitra dengan QMS, operasional gedung kami menjadi jauh lebih efisien. Sangat merekomendasikan layanan mereka.',
-    name: 'Siti Rahayu',
-    company: 'RS Harapan Bunda',
-    role: 'Facility Manager',
-  },
-  {
-    quote: 'Tenaga security dari QMS sangat terlatih dan disiplin. Kami merasa aman dan nyaman bekerja sama dengan mereka.',
-    name: 'Ahmad Wijaya',
-    company: 'Bank Nusantara',
-    role: 'Head of Operations',
-  },
+  { quote: 'QMS memberikan pelayanan yang sangat profesional. Tim mereka responsif dan selalu menjaga standar kebersihan yang tinggi.', name: 'Budi Santoso', company: 'PT Mitra Sejahtera', role: 'General Manager' },
+  { quote: 'Sejak bermitra dengan QMS, operasional gedung kami menjadi jauh lebih efisien. Sangat merekomendasikan layanan mereka.', name: 'Siti Rahayu', company: 'RS Harapan Bunda', role: 'Facility Manager' },
+  { quote: 'Tenaga security dari QMS sangat terlatih dan disiplin. Kami merasa aman dan nyaman bekerja sama dengan mereka.', name: 'Ahmad Wijaya', company: 'Bank Nusantara', role: 'Head of Operations' },
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* Hero + Stats */}
+      {/* ===== HERO ===== */}
       <section className={styles.hero}>
-        <div className={styles.heroOverlay}></div>
-        <div className={styles.heroInner}>
+        <div className="container">
           <div className={styles.heroContent}>
             <ScrollReveal>
-              <p className={styles.heroTagline}>Outsourcing & Facility Management</p>
+              <span className={styles.heroBadge}>Outsourcing &amp; Facility Management</span>
             </ScrollReveal>
             <ScrollReveal delay={0.15}>
-              <h1>Solusi <span className={styles.highlight}>Partner Terpercaya</span> untuk Pengelolaan Fasilitas Terintegrasi</h1>
+              <h1 className={styles.heroTitle}>
+                Solusi <span className={styles.heroHighlight}>Partner Terpercaya</span> untuk Pengelolaan Fasilitas
+              </h1>
             </ScrollReveal>
             <ScrollReveal delay={0.3}>
               <p className={styles.heroSub}>
-                PT Qiprah Multi Service menyediakan layanan kebersihan, keamanan, dan pemeliharaan gedung 
-                dengan SDM profesional bersertifikat. <strong>Attitude for Success.</strong>
+                PT Qiprah Multi Service menyediakan layanan kebersihan, keamanan, dan pemeliharaan gedung
+                dengan SDM profesional bersertifikat. Attitude for Success.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={0.45}>
@@ -144,15 +141,15 @@ export default function HomePage() {
           </div>
 
           <div className={styles.statsBar}>
-            <StatCounter end={8} label="Tahun Berpengalaman" suffix="+" />
-            <StatCounter end={50} label="Klien Aktif" suffix="+" />
-            <StatCounter end={500} label="Tenaga Kerja" suffix="+" />
-            <StatCounter end={6} label="Layanan Tersedia" />
+            <StatCounter end={8} label="Tahun Berpengalaman" suffix="+" icon={<CalendarIcon size={24} />} />
+            <StatCounter end={50} label="Klien Aktif" suffix="+" icon={<UsersIcon size={24} />} />
+            <StatCounter end={500} label="Tenaga Kerja" suffix="+" icon={<BriefcaseIcon size={24} />} />
+            <StatCounter end={6} label="Layanan Tersedia" icon={<ZapIcon size={24} />} />
           </div>
         </div>
       </section>
 
-      {/* Company Intro with Video */}
+      {/* ===== ABOUT ===== */}
       <section className="section">
         <div className="container">
           <div className={styles.introGrid}>
@@ -163,25 +160,25 @@ export default function HomePage() {
             </ScrollReveal>
             <div className={styles.introText}>
               <ScrollReveal>
-                <span className={styles.sectionTag}>TENTANG KAMI</span>
+                <span className={styles.heroBadge}>TENTANG KAMI</span>
                 <h2>PT Qiprah Multi Service</h2>
               </ScrollReveal>
               <ScrollReveal delay={0.15}>
                 <p>
-                  Perusahaan penyedia jasa alih daya (outsourcing) yang bergerak di semua aspek operasional 
-                  dan pemeliharaan fasilitas. Berkantor pusat di Semarang, kami melayani berbagai sektor 
+                  Perusahaan penyedia jasa alih daya (outsourcing) yang bergerak di semua aspek operasional
+                  dan pemeliharaan fasilitas. Berkantor pusat di Semarang, kami melayani berbagai sektor
                   perusahaan mulai dari perbankan, kesehatan, manufaktur, hingga properti.
                 </p>
               </ScrollReveal>
               <ScrollReveal delay={0.3}>
                 <p>
-                  Dengan semboyan <strong>"Attitude for Success"</strong>, kami mengutamakan profesionalisme, 
+                  Dengan semboyan &ldquo;Attitude for Success&rdquo;, kami mengutamakan profesionalisme,
                   integritas, dan kualitas layanan. Dipercaya lebih dari 50 perusahaan dengan 500+ tenaga kerja terlatih.
                 </p>
               </ScrollReveal>
               <ScrollReveal delay={0.45}>
-                <Link href="/tentang-kami" className="btn btn-ghost" style={{ paddingLeft: 0 }}>
-                  Selengkapnya tentang QMS →
+                <Link href="/tentang-kami" className="btn-ghost">
+                  Selengkapnya tentang QMS &rarr;
                 </Link>
               </ScrollReveal>
             </div>
@@ -189,150 +186,56 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Layanan */}
-      <section className="section section-alt">
+      {/* ===== SERVICES ===== */}
+      <section className="section section-dark">
         <div className="container">
           <div className="section-heading">
             <h2>Layanan Kami</h2>
             <p>Solusi lengkap untuk kebutuhan operasional dan pemeliharaan fasilitas Anda</p>
             <div className="line"></div>
           </div>
-          <div className={styles.servicesGrid}>
-            {services.map((svc, i) => (
-              <ScrollReveal key={svc.slug} delay={i * 0.08}>
-                <Link href={`/layanan/${svc.slug}`} className={styles.serviceCard}>
-                  <div className={styles.serviceThumb}>
-                    <img src={svc.images[0]} alt={svc.title} loading="lazy" />
-                    <div className={styles.serviceIconBadge}>
-                      <ServiceIcon slug={svc.slug} size={22} color="#E31E24" />
-                    </div>
-                  </div>
-                  <div className={styles.serviceBody}>
-                    <h3>{svc.title}</h3>
-                    <p>{svc.shortDesc}</p>
-                    <span className={styles.serviceLink}>Selengkapnya →</span>
-                  </div>
-                </Link>
-              </ScrollReveal>
-            ))}
-          </div>
-          <div style={{ textAlign: 'center', marginTop: '32px' }}>
-            <Link href="/layanan" className="btn btn-outline">Lihat Semua Layanan</Link>
-          </div>
         </div>
+        <ServiceCarousel services={services} />
       </section>
 
-      {/* Why QMS - Image + Feature List */}
+      {/* ===== PROCESS ===== */}
       <section className="section">
-        <div className="container">
-          <div className={styles.whyLayout}>
-            <ScrollReveal direction="left">
-              <div className={styles.whyImage}>
-                <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=600&h=500&fit=crop" alt="Tim QMS" loading="lazy" />
-                <div className={styles.whyBadge}>
-                  <span className={styles.whyBadgeNum}>50+</span>
-                  <span>Perusahaan Mempercayai Kami</span>
-                </div>
-              </div>
-            </ScrollReveal>
-            <div className={styles.whyContent}>
-              <ScrollReveal>
-                <span className={styles.sectionTag}>KEUNGGULAN</span>
-                <h2>Mengapa Memilih QMS?</h2>
-              </ScrollReveal>
-              <div className={styles.whyList}>
-                {whyItems.map((item, i) => (
-                  <ScrollReveal key={item.title} delay={i * 0.1}>
-                    <div className={styles.whyItem}>
-                      <div className={styles.whyCheck}>✓</div>
-                      <div>
-                        <strong>{item.title}</strong>
-                        <p>{item.desc}</p>
-                      </div>
-                    </div>
-                  </ScrollReveal>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Proses Kerja */}
-      <section className="section section-alt">
         <div className="container">
           <div className="section-heading">
             <h2>Proses Kerja Kami</h2>
             <p>Langkah sistematis untuk memastikan layanan terbaik bagi Anda</p>
             <div className="line"></div>
           </div>
-          <div className={styles.stepsGrid}>
-            {workSteps.map((step, i) => (
-              <ScrollReveal key={step.num} delay={i * 0.12}>
-                <div className={styles.stepCard}>
-                  <div className={styles.stepNum}>{step.num}</div>
-                  <h3>{step.title}</h3>
-                  <p>{step.desc}</p>
-                  {i < workSteps.length - 1 && <div className={styles.stepArrow}>→</div>}
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
+          <ProcessTimeline steps={processSteps} />
         </div>
       </section>
 
-      {/* Sertifikasi & Legalitas */}
-      <section className="section">
+      {/* ===== KEUNGGULAN / BENTO ===== */}
+      <section className="section section-dark">
         <div className="container">
           <div className="section-heading">
-            <h2>Sertifikasi & Legalitas</h2>
-            <p>Beroperasi dengan standar dan legalitas yang terpercaya</p>
+            <h2>Keunggulan QMS</h2>
+            <p>Alasan mengapa ratusan perusahaan mempercayakan fasilitas mereka kepada kami</p>
             <div className="line"></div>
           </div>
-          <div className={styles.certGrid}>
-            {certItems.map((cert, i) => (
-              <ScrollReveal key={cert.title} delay={i * 0.1}>
-                <div className={styles.certCard}>
-                  <div className={styles.certIcon}>{cert.icon}</div>
-                  <h4>{cert.title}</h4>
-                  <p>{cert.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
+          <BentoGrid items={bentoItems} />
         </div>
       </section>
 
-      {/* Testimoni */}
-      <section className="section section-alt">
+      {/* ===== TESTIMONIALS ===== */}
+      <section className="section">
         <div className="container">
           <div className="section-heading">
             <h2>Testimoni Klien</h2>
             <p>Apa kata mereka yang telah bermitra dengan QMS</p>
             <div className="line"></div>
           </div>
-          <div className={styles.testimoniGrid}>
-            {testimonials.map((t, i) => (
-              <ScrollReveal key={t.name} delay={i * 0.12}>
-                <div className={styles.testimoniCard}>
-                  <div className={styles.quoteIcon}>"</div>
-                  <p className={styles.quoteText}>{t.quote}</p>
-                  <div className={styles.quoteAuthor}>
-                    <div className={styles.quoteAvatar}>{t.name ? t.name[0] : '?'}</div>
-                    <div>
-                      <strong>{t.name}</strong>
-                      <span>{t.role}, {t.company}</span>
-                    </div>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
+          <TestimonialSlider testimonials={testimonials} />
         </div>
       </section>
 
-      {/* Client Marquee */}
-      <section className={`section ${styles.clientSection}`}>
+      {/* ===== CLIENT MARQUEE ===== */}
+      <section className="section">
         <div className="container">
           <div className="section-heading">
             <h2>Dipercaya oleh Perusahaan Terkemuka</h2>
@@ -343,12 +246,26 @@ export default function HomePage() {
         <ClientMarquee />
       </section>
 
-      {/* CTA */}
+      {/* ===== RUNNING TEXT ===== */}
+      <RunningText />
+
+      {/* ===== CTA ===== */}
       <section className="cta-banner">
         <div className="container">
           <h2>Tertarik Bermitra dengan Kami?</h2>
-          <p>Tim kami siap membantu kebutuhan operasional perusahaan Anda</p>
-          <Link href="/kontak" className="btn btn-primary">Hubungi Kami</Link>
+          <p>Tim kami siap membantu kebutuhan operasional dan fasilitas perusahaan Anda</p>
+          <div className={styles.ctaBtns}>
+            <Link href="/kontak" className="btn btn-primary">Hubungi Kami</Link>
+            <a
+              href="https://wa.me/6281234567890"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline"
+            >
+              <WhatsAppIcon size={18} />
+              Konsultasi Gratis
+            </a>
+          </div>
         </div>
       </section>
     </>
