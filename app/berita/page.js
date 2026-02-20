@@ -7,6 +7,19 @@ import styles from './page.module.css';
 export const metadata = { title: 'Berita & Updates | QMS', description: 'Berita dan informasi terkini dari PT Qiprah Multi Service.' };
 
 export default function BeritaPage() {
+  if (!news || news.length === 0) {
+    return (
+      <>
+        <section className="page-header">
+          <div className="container">
+            <h1>Berita &amp; Updates</h1>
+            <p>Belum ada berita tersedia.</p>
+          </div>
+        </section>
+      </>
+    );
+  }
+
   const [featured, ...rest] = news;
 
   return (
