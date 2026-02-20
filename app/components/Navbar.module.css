@@ -1,13 +1,18 @@
 .navbar {
   position: fixed; top: 0; left: 0; right: 0;
   height: 72px; z-index: 1000;
-  background: white;
-  transition: all 0.3s ease;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.6);
+  transition: all 0.35s ease;
 }
 .scrolled {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--qms-border);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.07);
 }
 .container {
   max-width: 1200px; margin: 0 auto; padding: 0 24px;

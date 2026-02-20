@@ -2,6 +2,7 @@ import './globals.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppFloat from './components/WhatsAppFloat';
+import AnimatedBackground from './components/AnimatedBackground';
 
 export const metadata = {
   title: 'PT Qiprah Multi Service | Attitude for Success',
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="id">
       <body>
+        <AnimatedBackground />
         <Navbar />
         <main>{children}</main>
         <Footer />
