@@ -172,7 +172,7 @@ export default function HomePage() {
               </ScrollReveal>
               <ScrollReveal delay={0.3}>
                 <p>
-                  Dengan semboyan &ldquo;Attitude for Success&rdquo;, kami mengutamakan profesionalisme,
+                  Dengan semboyan {'\u201cAttitude for Success\u201d'}, kami mengutamakan profesionalisme,
                   integritas, dan kualitas layanan. Dipercaya lebih dari 50 perusahaan dengan 500+ tenaga kerja terlatih.
                 </p>
               </ScrollReveal>
