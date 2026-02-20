@@ -6,17 +6,20 @@
   width: max-content;
   animation: marquee 35s linear infinite;
 }
+.inner:hover { animation-play-state: paused; }
 .logoItem { flex-shrink: 0; display: flex; align-items: center; }
 .logoItem img {
   width: 120px;
   height: 48px;
   object-fit: contain;
-  opacity: 0.55;
+  opacity: 0.5;
   transition: all 0.3s;
+  filter: grayscale(100%);
 }
 .logoItem img:hover {
   opacity: 1;
   transform: scale(1.1);
+  filter: grayscale(0%);
 }
 @keyframes marquee {
   from { transform: translateX(0); }

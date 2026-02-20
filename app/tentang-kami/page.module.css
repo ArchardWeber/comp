@@ -1,6 +1,17 @@
 .sectionTag {
-  display: inline-block; color: var(--qms-red);
-  font-size: 13px; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--qms-red);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding: 5px 14px;
+  background: rgba(227,30,36,0.07);
+  border-radius: 100px;
+  border: 1px solid rgba(227,30,36,0.15);
 }
 
 .profilGrid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
@@ -11,10 +22,11 @@
 /* === Visi Misi === */
 .visiMisiLayout { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
 .visiCard, .misiCard {
-  background: white; border-radius: 16px; padding: 36px 32px;
+  background: white; border-radius: 20px; padding: 40px 36px;
   box-shadow: var(--shadow-md); border: 1px solid var(--qms-border);
-  height: 100%;
+  height: 100%; transition: transform 0.3s, box-shadow 0.3s;
 }
+.visiCard:hover, .misiCard:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
 .visiCard { border-top: 4px solid var(--qms-red); }
 .misiCard { border-top: 4px solid var(--qms-charcoal); }
 .visiHeader { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
