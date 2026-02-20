@@ -79,6 +79,42 @@ const whyItems = [
   { title: 'Dipercaya 50+ Perusahaan', desc: 'Klien dari sektor perbankan, kesehatan, manufaktur, dan properti.' },
 ];
 
+const workSteps = [
+  { num: '01', title: 'Konsultasi', desc: 'Diskusi mendalam tentang kebutuhan operasional dan fasilitas perusahaan Anda.' },
+  { num: '02', title: 'Survey & Analisa', desc: 'Tim kami melakukan survei lapangan dan analisis kebutuhan secara menyeluruh.' },
+  { num: '03', title: 'Implementasi', desc: 'Penempatan SDM terlatih dan peralatan sesuai standar yang disepakati.' },
+  { num: '04', title: 'Monitoring & Evaluasi', desc: 'Pemantauan berkala dan laporan performa untuk memastikan kualitas terjaga.' },
+];
+
+const certItems = [
+  { icon: '📋', title: 'ISO 9001:2015', desc: 'Sistem Manajemen Mutu' },
+  { icon: '🏛️', title: 'Badan Hukum PT', desc: 'Legalitas Perusahaan' },
+  { icon: '💪', title: 'BPJS Ketenagakerjaan', desc: 'Jaminan Tenaga Kerja' },
+  { icon: '🏥', title: 'BPJS Kesehatan', desc: 'Jaminan Kesehatan' },
+  { icon: '🤝', title: 'APJASI', desc: 'Asosiasi Outsourcing' },
+];
+
+const testimonials = [
+  {
+    quote: 'QMS memberikan pelayanan yang sangat profesional. Tim mereka responsif dan selalu menjaga standar kebersihan yang tinggi.',
+    name: 'Budi Santoso',
+    company: 'PT Mitra Sejahtera',
+    role: 'General Manager',
+  },
+  {
+    quote: 'Sejak bermitra dengan QMS, operasional gedung kami menjadi jauh lebih efisien. Sangat merekomendasikan layanan mereka.',
+    name: 'Siti Rahayu',
+    company: 'RS Harapan Bunda',
+    role: 'Facility Manager',
+  },
+  {
+    quote: 'Tenaga security dari QMS sangat terlatih dan disiplin. Kami merasa aman dan nyaman bekerja sama dengan mereka.',
+    name: 'Ahmad Wijaya',
+    company: 'Bank Nusantara',
+    role: 'Head of Operations',
+  },
+];
+
 export default function HomePage() {
   return (
     <>
@@ -120,9 +156,8 @@ export default function HomePage() {
       <section className="section">
         <div className="container">
           <div className={styles.introGrid}>
-            <ScrollReveal>
+            <ScrollReveal direction="left">
               <div className={styles.videoWrapper}>
-                {/* Ganti VIDEO_ID_ANDA dengan ID YouTube video profil QMS */}
                 <YouTubeEmbed videoId="dQw4w9WgXcQ" />
               </div>
             </ScrollReveal>
@@ -167,7 +202,7 @@ export default function HomePage() {
               <ScrollReveal key={svc.slug} delay={i * 0.08}>
                 <Link href={`/layanan/${svc.slug}`} className={styles.serviceCard}>
                   <div className={styles.serviceThumb}>
-                    <img src={svc.images[0]} alt={svc.title} />
+                    <img src={svc.images[0]} alt={svc.title} loading="lazy" />
                     <div className={styles.serviceIconBadge}>
                       <ServiceIcon slug={svc.slug} size={22} color="#E31E24" />
                     </div>
@@ -191,9 +226,9 @@ export default function HomePage() {
       <section className="section">
         <div className="container">
           <div className={styles.whyLayout}>
-            <ScrollReveal>
+            <ScrollReveal direction="left">
               <div className={styles.whyImage}>
-                <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=600&h=500&fit=crop" alt="Tim QMS" />
+                <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=600&h=500&fit=crop" alt="Tim QMS" loading="lazy" />
                 <div className={styles.whyBadge}>
                   <span className={styles.whyBadgeNum}>50+</span>
                   <span>Perusahaan Mempercayai Kami</span>
@@ -223,8 +258,81 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Proses Kerja */}
+      <section className="section section-alt">
+        <div className="container">
+          <div className="section-heading">
+            <h2>Proses Kerja Kami</h2>
+            <p>Langkah sistematis untuk memastikan layanan terbaik bagi Anda</p>
+            <div className="line"></div>
+          </div>
+          <div className={styles.stepsGrid}>
+            {workSteps.map((step, i) => (
+              <ScrollReveal key={step.num} delay={i * 0.12}>
+                <div className={styles.stepCard}>
+                  <div className={styles.stepNum}>{step.num}</div>
+                  <h3>{step.title}</h3>
+                  <p>{step.desc}</p>
+                  {i < workSteps.length - 1 && <div className={styles.stepArrow}>→</div>}
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sertifikasi & Legalitas */}
+      <section className="section">
+        <div className="container">
+          <div className="section-heading">
+            <h2>Sertifikasi & Legalitas</h2>
+            <p>Beroperasi dengan standar dan legalitas yang terpercaya</p>
+            <div className="line"></div>
+          </div>
+          <div className={styles.certGrid}>
+            {certItems.map((cert, i) => (
+              <ScrollReveal key={cert.title} delay={i * 0.1}>
+                <div className={styles.certCard}>
+                  <div className={styles.certIcon}>{cert.icon}</div>
+                  <h4>{cert.title}</h4>
+                  <p>{cert.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimoni */}
+      <section className="section section-alt">
+        <div className="container">
+          <div className="section-heading">
+            <h2>Testimoni Klien</h2>
+            <p>Apa kata mereka yang telah bermitra dengan QMS</p>
+            <div className="line"></div>
+          </div>
+          <div className={styles.testimoniGrid}>
+            {testimonials.map((t, i) => (
+              <ScrollReveal key={t.name} delay={i * 0.12}>
+                <div className={styles.testimoniCard}>
+                  <div className={styles.quoteIcon}>"</div>
+                  <p className={styles.quoteText}>{t.quote}</p>
+                  <div className={styles.quoteAuthor}>
+                    <div className={styles.quoteAvatar}>{t.name[0]}</div>
+                    <div>
+                      <strong>{t.name}</strong>
+                      <span>{t.role}, {t.company}</span>
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Client Marquee */}
-      <section className={`section section-alt ${styles.clientSection}`}>
+      <section className={`section ${styles.clientSection}`}>
         <div className="container">
           <div className="section-heading">
             <h2>Dipercaya oleh Perusahaan Terkemuka</h2>
@@ -235,7 +343,7 @@ export default function HomePage() {
         <ClientMarquee />
       </section>
 
-      {/* CTA - simplified */}
+      {/* CTA */}
       <section className="cta-banner">
         <div className="container">
           <h2>Tertarik Bermitra dengan Kami?</h2>
