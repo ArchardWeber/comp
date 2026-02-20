@@ -7,14 +7,16 @@ export default function ParallaxBackground() {
   const rafRef = useRef(null);
 
   useEffect(() => {
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    if (isMobile) return;
+    const mq = window.matchMedia('(max-width: 768px)');
+    let active = !mq.matches;
 
     const orbs = containerRef.current?.querySelectorAll('[data-speed]');
     if (!orbs) return;
 
     let lastY = 0;
+
     const onScroll = () => {
+      if (!active) return;
       if (rafRef.current) return;
       rafRef.current = requestAnimationFrame(() => {
         rafRef.current = null;
@@ -28,8 +30,17 @@ export default function ParallaxBackground() {
       });
     };
 
+    const onMqChange = (e) => {
+      active = !e.matches;
+      if (!active) {
+        orbs.forEach((el) => { el.style.transform = ''; });
+      }
+    };
+
+    mq.addEventListener('change', onMqChange);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
+      mq.removeEventListener('change', onMqChange);
       window.removeEventListener('scroll', onScroll);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };

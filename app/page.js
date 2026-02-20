@@ -318,7 +318,7 @@ export default function HomePage() {
                   <div className={styles.quoteIcon}>"</div>
                   <p className={styles.quoteText}>{t.quote}</p>
                   <div className={styles.quoteAuthor}>
-                    <div className={styles.quoteAvatar}>{t.name[0]}</div>
+                    <div className={styles.quoteAvatar}>{t.name ? t.name[0] : '?'}</div>
                     <div>
                       <strong>{t.name}</strong>
                       <span>{t.role}, {t.company}</span>
